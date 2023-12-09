@@ -23,7 +23,7 @@ pipeline {
         stage("Deploy") {
             steps {
                 sh '''
-                helm upgrade flask helm/
+                helm install flask helm/
                 '''
             }
         }
