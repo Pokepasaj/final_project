@@ -17,7 +17,6 @@ pipeline {
             steps {
                 sh '''
                 docker push $image_name:latest
-                ls -al
                 '''
             }
         }
@@ -25,6 +24,7 @@ pipeline {
             steps {
                 sh '''
                 helm upgrade flask helm/ --install --wait --atomic
+                echo "Helm output: ${helmOutput}"
                 '''
             }
         }
