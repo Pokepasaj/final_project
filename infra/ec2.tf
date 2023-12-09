@@ -72,6 +72,7 @@ nodes:
   chown -R jenkins:jenkins /var/lib/jenkins/.kube/
   sudo cp /.kube/config /home/ec2-user/.kube/
   sudo chown ec2-user:ec2-user config
+  kubectl create secret docker-registry regcred --docker-server=750126809429.dkr.ecr.eu-central-1.amazonaws.com --docker-username=AWS --docker-password=$(aws ecr get-login-password --region eu-central-1)
 EOF
   iam_instance_profile = aws_iam_instance_profile.profile.name
   network_interface {
