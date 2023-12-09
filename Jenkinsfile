@@ -17,7 +17,6 @@ pipeline {
             steps {
                 sh '''
                 docker push $image_name:latest
-                ls
                 '''
             }
         }
