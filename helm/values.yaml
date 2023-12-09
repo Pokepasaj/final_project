@@ -5,4 +5,4 @@ Deployment:
   tag: latest
   port: 5000
 Service:
-  nodeport: 30000
+  nodeport: 30001
