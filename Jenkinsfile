@@ -24,7 +24,9 @@ pipeline {
             steps {
                 sh '''
                 helm upgrade flask helm/ --install --wait --atomic
-                echo "Helm output: ${helmOutput}"
+                 echo "Helm output: ${helmOutput}"
+            } catch (Exception e) {
+                echo "Helm deployment failed: ${e.message}
                 '''
             }
         }
