@@ -9,7 +9,7 @@ pipeline {
             steps {
                 sh '''
                 aws ecr get-login-password --region $region | docker login --username AWS --password-stdin 750126809429.dkr.ecr.eu-central-1.amazonaws.com
-                docker build -t $image_name:latest .
+                sudo docker build -t $image_name:latest .
                 '''
             }
         }
