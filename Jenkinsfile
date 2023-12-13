@@ -26,6 +26,7 @@ pipeline {
                 helm install flask helm/
                 echo "it works"
                 pwd
+                ls
                 '''
             }
         }
