@@ -24,7 +24,7 @@ pipeline {
             steps {
                 sh '''
                 helm install flask helm/
-                echo "it works!"
+                echo "it works"
                 '''
             }
         }
