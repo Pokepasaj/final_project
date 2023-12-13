@@ -23,7 +23,7 @@ pipeline {
         stage("Deploy") {
             steps {
                 sh '''
-                helm upgrade flask helm/ --install --wait --atomic
+                helm upgrade flask /var/lib/jenkins/workspace/helm/ --install --wait --atomic
                 echo "it works"
                 '''
             }
