@@ -60,6 +60,7 @@ resource "aws_instance" "ec2" {
     sudo mkdir -p /var/lib/jenkins/.kube/
     kind get kubeconfig --name=kind > /var/lib/jenkins/.kube/config
     chown -R jenkins: /var/lib/jenkins/.kube
+    kubectl create secret docker-registry regcred --docker-server=750126809429.dkr.ecr.eu-central-1.amazonaws.com --docker-username=AWS --docker-password=$(aws ecr get-login-password --region eu-central-1)
 EOF
   iam_instance_profile = aws_iam_instance_profile.profile.name
   network_interface {

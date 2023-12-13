@@ -19,3 +19,5 @@ spec:
         image: "{{ .Values.Deployment.image }}:{{ .Values.Deployment.tag }}"
         ports:
         - containerPort: {{ .Values.Deployment.port }}
+        imagePullSecrets:
+          - name: regcred
