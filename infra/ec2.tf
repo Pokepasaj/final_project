@@ -54,25 +54,12 @@ resource "aws_instance" "ec2" {
     sudo usermod -aG docker jenkins
     sudo usermod -aG docker ec2-user
     #############[kind.yaml]#############
-    echo "apiVersion: kind.x-k8s.io/v1alpha4
-kind: Cluster
-nodes:
-- role: control-plane
-  extraPortMappings:
-  - containerPort: 30000
-    hostPort: 30000
-    listenAddress: "0.0.0.0" # Optional, defaults to "0.0.0.0"
-    protocol: tcp # Optional, defaults to tcp
-- role: worker
-- role: worker" > /home/ec2-user/kind.yaml
+    aws s3 cp s3://kind-storage-s3/kind.yaml /var/lib/jenkins/
 
-  kind create cluster --config /home/ec2-user/kind.yaml
-  sudo mkdir -p /var/lib/jenkins/.kube/
-  sudo cp /.kube/config /var/lib/jenkins/.kube/
-  chown -R jenkins:jenkins /var/lib/jenkins/.kube/
-  sudo cp /.kube/config /home/ec2-user/.kube/
-  sudo chown ec2-user:ec2-user config
-  kubectl create secret docker-registry regcred --docker-server=750126809429.dkr.ecr.eu-central-1.amazonaws.com --docker-username=AWS --docker-password=$(aws ecr get-login-password --region eu-central-1)
+    kind create cluster --config=/var/lib/jenkins/kind.yaml
+    sudo mkdir -p /var/lib/jenkins/.kube/
+    kind get kubeconfig --name=kind > /var/lib/jenkins/.kube/config
+    chown -R jenkins: /var/lib/jenkins/.kube
 EOF
   iam_instance_profile = aws_iam_instance_profile.profile.name
   network_interface {
