@@ -23,7 +23,7 @@ pipeline {
         stage("Deploy") {
             steps {
                 sh '''
-                helm install flask1 helm/
+                helm install flask helm/
                 echo "it works"
                 pwd
                 ls
