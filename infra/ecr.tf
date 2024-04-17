@@ -1,4 +1,4 @@
 resource "aws_ecr_repository" "ecr" {
-  name = "flaskapp"
+  name                 = local.name
+  image_tag_mutability = "IMMUTABLE"
 }
-

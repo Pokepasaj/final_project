@@ -10,7 +10,7 @@ data "aws_ami" "amazon-linux-2" {
   }
 }
 resource "aws_network_interface" "interface" {
-  subnet_id       = "subnet-00e005c11762fd42c"
+  subnet_id       = local.subnet
   security_groups = [aws_security_group.allow_tls.id]
   
 
@@ -18,7 +18,7 @@ resource "aws_network_interface" "interface" {
 resource "aws_instance" "ec2" {
   depends_on           = [aws_network_interface.interface]
   ami                  = data.aws_ami.amazon-linux-2.id
-  instance_type        = "t2.medium"
+  instance_type        = local.instance_type
   user_data            = <<EOF
         #!/bin/bash
     #############[Docker]#############
